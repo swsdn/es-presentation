@@ -155,6 +155,184 @@
 
 				</section>
 
+				<section>
+					<section>
+						<h2>Mapping</h2>
+						<p>
+							Mapping is the process of defining how a document should be mapped to the Search Engine, including its searchable characteristics such as which fields are searchable and if/how they are tokenized.
+						</p>
+						<p>
+							Mapping is defined on an index/type level.
+						</p>
+						<p>
+							Dynamic mapping: automatically created and registered when a new type or new field is introduced.
+						</p>
+					</section>
+
+					<section>
+						<h2>Mapping - metadata fields</h2>
+						
+							<p>_id
+								<pre>
+									<code>
+"typeName" : {
+	"_id" : {
+		"path" : "post_id"
+	}
+}
+									</code>
+								</pre>
+							</p>
+					</section>
+
+					<section>
+						<h2>Mapping - metadata fields</h2>
+
+							<p>_source
+								<pre>
+									<code>
+"typeName" : {
+	"_source" : {
+		"enable" : "false"
+	}
+}
+									</code>
+									<code>
+"typeName" : {
+	"_source" : {
+		"includes" : ["path1.*", "path2.*"],
+        "excludes" : ["path3.*"]
+	}
+}
+									</code>
+								</pre>
+							</p>
+
+					</section>
+
+					<section>
+						<h2>Mapping - metadata fields</h2>
+						
+							<p>_all
+								<pre>
+									<code>
+"typeName" : {
+	"_all" : {
+		"enable" : "false"
+	}
+}
+									</code>
+								</pre>
+							</p>
+					</section>
+
+					<section>
+						<h2>Mapping - metadata fields</h2>
+						
+							<p>_analyzer
+								<pre>
+									<code>
+"typeName" : {
+	"_analyzer" : {
+		"path" : "field_name"
+	}
+}
+									</code>
+								</pre>
+							</p>
+					</section>
+
+					<section>
+						<h2>Mapping - metadata fields</h2>
+					
+							<p>_parent
+								<pre>
+									<code>
+"typeName" : {
+	"_parent" : {
+		"type" : "parent_type_name"
+	}
+}
+									</code>
+								</pre>
+							</p>
+					</section>
+
+					<section>
+						<h2>Mapping - metadata fields</h2>
+					
+							<p>_routing
+								<pre>
+									<code>
+"typeName" : {
+	"_routing" : {
+        "required" : true,
+        "path" : "field_name"
+    }
+}
+									</code>
+								</pre>
+							</p>
+					</section>
+
+					<section>
+						<h2>Mapping - metadata fields</h2>
+					
+							<p>_timestamp
+								<pre>
+									<code>
+"typeName" : {
+	"_timestamp" : {
+        "enabled" : true,
+        "path" : "field_name",
+        "format" : "YYYY-MM-dd"
+    }
+}
+									</code>
+									<code>
+# Disable that default value. It means that timestamp is mandatory
+"typeName" : {
+	"_timestamp" : {
+        "enabled" : true,
+        "default" : null
+    }
+}
+									</code>
+								</pre>
+							</p>
+					</section>
+
+					<section>
+						<h2>Mapping - metadata fields</h2>
+					
+							<p>_ttl
+								<pre>
+									<code>
+# d (days), m (minutes), h (hours), ms (milliseconds) or w (weeks)
+"typeName" : {
+	"_ttl" : {
+        "enabled" : true, 
+        "default" : "1d"
+    }
+}
+									</code>
+								</pre>
+							</p>
+						
+					</section>
+
+					<section>
+						<h2>Mapping - core types</h2>
+						<ul>
+							<li>Strings: string</li>
+							<li>Numbers: byte, short, integer, long, float, double</li>
+							<li>Datetimes: date</li>
+							<li>Booleans: boolean</li>
+							<li>Objects: object </li>
+						</ul>
+					</section>
+				</section>
+
 			</div>
 
 		</div>
