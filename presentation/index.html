@@ -52,18 +52,107 @@
 				</section>
 
 				<section>
-					<h2>Basic concepts</h2>
-					<p>
-						<img src="img/replicas.png" />
-						<ul>
-							<li>Cluster</li>
-							<li>Node</li>
-							<li>Index</li>
-							<li>Type</li>
-							<li>Document</li>
-							<li>Shards & Replicas</li>
-						</ul>	
-					</p>
+					<section>
+						<h2>Basic concepts</h2>
+						<p>
+							<img src="img/replicas.png" />
+							<ul>
+								<li>Cluster</li>
+								<li>Node</li>
+								<li>Index</li>
+								<li>Type</li>
+								<li>Document</li>
+								<li>Shards & Replicas</li>
+							</ul>	
+						</p>
+					</section>
+
+					<section>
+						<h2>Index</h2>
+						<p>
+							An index is a collection of documents that have somewhat similar characteristics.
+						</p>
+						<p>
+							In a single cluster, you can define as many indexes as you want.
+						</p>
+						<pre>
+							<code>
+								#create index
+								curl -XPUT http://10.0.0.11:9200/subscriptions/ -d '{
+								    "settings" : {
+								        "number_of_shards" : 5,
+								        "number_of_replicas" : 2
+								    }
+								}'
+							</code>
+						</pre>
+					</section>
+					
+					<section>
+						<h2>Type</h2>
+						<p>
+							Within an index, you can define one or more types.
+						</p>
+						<p>
+							Type is a logical category/partition of your index whose semantics is completely up to you.
+						</p>
+						<pre>
+							<code>
+								#Create mapping/type
+								curl -XPUT http://10.0.0.11:9200/subscriptions/_mapping/type1 -d '{
+								      "type1" : { 
+								          "properties" : {
+								              "field1" : { "type" : "string" }
+								          }                                   
+								      }    
+								}'
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<h2>Document</h2>
+						<p>
+							A document is a basic unit of information that can be indexed.
+						</p>
+						<p>
+							Document is expressed in JSON
+						</p>
+						<pre>
+							<code>
+								curl -XPUT http://10.0.0.11:9200/subscriptions/subscription/1 -d '{
+								    "user" : "ypereirareis",
+								    "post_date" : "2014-03-26T14:12:12",
+								    "message" : "Trying out vagrant elasticsearch cluster"
+								}'
+							</code>
+						</pre>
+					 </section>
+
+					<section>
+						<h2>Shards & Replicas</h2>
+						<pre>
+							<code>
+								#update 
+								curl -XPUT http://10.0.0.11:9200/subscriptions/_settings -d '{
+								     "index" : {
+								         "number_of_replicas" : 4
+								     } 
+								}'
+
+								#get settings
+								curl -XGET http://10.0.0.11:9200/subscriptions/_settings?pretty
+
+								#try change number of shards
+								curl -XPUT http://10.0.0.11:9200/subscriptions/_settings -d '{
+								    "index" : {
+								        "number_of_shards" : 4
+								    } 
+								}'
+							</code>
+						</pre>
+					</section>
+
 				</section>
 
 			</div>
