@@ -176,9 +176,9 @@
 								<pre>
 									<code>
 "typeName" : {
-	"_id" : {
-		"path" : "post_id"
-	}
+    "_id" : {
+        "path" : "post_id"
+    }
 }
 									</code>
 								</pre>
@@ -192,17 +192,17 @@
 								<pre>
 									<code>
 "typeName" : {
-	"_source" : {
-		"enable" : "false"
-	}
+    "_source" : {
+        "enable" : "false"
+    }
 }
 									</code>
 									<code>
 "typeName" : {
-	"_source" : {
-		"includes" : ["path1.*", "path2.*"],
+    "_source" : {
+        "includes" : ["path1.*", "path2.*"],
         "excludes" : ["path3.*"]
-	}
+    }
 }
 									</code>
 								</pre>
@@ -217,9 +217,9 @@
 								<pre>
 									<code>
 "typeName" : {
-	"_all" : {
-		"enable" : "false"
-	}
+    "_all" : {
+        "enable" : "false"
+    }
 }
 									</code>
 								</pre>
@@ -233,9 +233,9 @@
 								<pre>
 									<code>
 "typeName" : {
-	"_analyzer" : {
-		"path" : "field_name"
-	}
+    "_analyzer" : {
+        "path" : "field_name"
+    }
 }
 									</code>
 								</pre>
@@ -249,9 +249,9 @@
 								<pre>
 									<code>
 "typeName" : {
-	"_parent" : {
-		"type" : "parent_type_name"
-	}
+    "_parent" : {
+        "type" : "parent_type_name"
+    }
 }
 									</code>
 								</pre>
@@ -265,7 +265,7 @@
 								<pre>
 									<code>
 "typeName" : {
-	"_routing" : {
+    "_routing" : {
         "required" : true,
         "path" : "field_name"
     }
@@ -282,7 +282,7 @@
 								<pre>
 									<code>
 "typeName" : {
-	"_timestamp" : {
+    "_timestamp" : {
         "enabled" : true,
         "path" : "field_name",
         "format" : "YYYY-MM-dd"
@@ -292,7 +292,7 @@
 									<code>
 # Disable that default value. It means that timestamp is mandatory
 "typeName" : {
-	"_timestamp" : {
+    "_timestamp" : {
         "enabled" : true,
         "default" : null
     }
@@ -310,7 +310,7 @@
 									<code>
 # d (days), m (minutes), h (hours), ms (milliseconds) or w (weeks)
 "typeName" : {
-	"_ttl" : {
+    "_ttl" : {
         "enabled" : true, 
         "default" : "1d"
     }
