@@ -68,3 +68,8 @@ curl -XPUT http://10.0.0.11:9200/shakespeare -d '
    }
 }';
 ```
+
+## Search z routingiem:
+```sh
+curl -XGET 'http://10.0.0.11:9200/shakespeare/_count?pretty&q=to%20be%20or%20not&size=3&routing=Hamlet'
+```
