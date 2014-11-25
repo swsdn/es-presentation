@@ -331,8 +331,93 @@
 							<li>Objects: object </li>
 						</ul>
 					</section>
+
+					<section>
+						<h2>Mapping - example</h2>
+						<pre>
+							<code>
+curl -XPUT http://localhost:9200/subscriptions/_mapping/subscription -d '{
+    "subscription": {
+        "properties" : {
+            "user" : {
+                "type" : "string",
+                "store" : true,
+                "index" : "analyzed",
+                "null_value" : "na",
+                "fields" : {
+                   "raw" : {"type" : "string", "index" : "not_analyzed"}
+                }
+            },
+            "message" : {
+                "type" : "string",
+                "store" : true,
+                "index" : "analyzed",
+                "include_in_all": true
+            },
+            "post_date": {
+            	"type" : "date",
+            	"format" : "YYYY-MM-dd||YYYY-MM-dd HH:mm:ss"
+            }
+        }
+    }
+}'
+							</code>
+						</pre>
+					</section>
 				</section>
 
+				<section>
+					<section>
+						<h2>Transform (1.3)</h2>
+						<ul>
+							<li>The document can be transformed before it is indexed</li>
+							<li>The result of the transform is indexed but the original source is stored in the _source field</li>
+							<li>Transform script cannot be added to an existing mapping for an index type</li>
+							<li>Once configured the transform script cannot be modified</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Transform - example</h2>
+						<pre>
+							<code>
+curl -XPUT http://localhost:9200/subscriptions/_mapping/msg -d '{
+    "msg": {
+        "transform": {
+            "lang":"groovy",
+            "script":"if (ctx._source['status']?.equals('created')) ctx._source['date'] = ctx._source['created']; else  ctx._source['date'] = ctx._source['updated'];"
+        },
+        "properties" : {
+            "status" : { "type" : "string" },
+            "created" : { "type" : "date", "format": "YYYY-MM-dd", "include_in_all": false },
+            "updated" : { "type" : "date", "format": "YYYY-MM-dd", "include_in_all": false },
+            "date" : { "type" : "date", "format": "YYYY-MM-dd" }
+        }
+    }
+}'
+							</code>
+							<code>
+# get transformed
+curl -XGET http://localhost:9200/subscriptions/msg/1?pretty&_source_transform
+							</code>
+						</pre>	
+					</section>
+				</section>
+
+				<section>
+					<h2>Analyzers</h2> are composed of a single Tokenizer and zero or more TokenFilters. The tokenizer may be preceded by one or more CharFilters.
+					<ul>
+						<li>
+							Tokenizers are used to break a string down into a stream of terms or tokens.
+						</li>
+						<li>
+							Token filters accept a stream of tokens from a tokenizer and can modify tokens (eg lowercasing), delete tokens (eg remove stopwords) or add tokens (eg synonyms).
+						</li>
+						<li>
+							Character filters are used to preprocess the string of characters before it is passed to the tokenizer. A character filter may be used to strip out HTML markup, or to convert "&" characters to the word "and".
+						</li>
+					</ul>
+				</section>
 			</div>
 
 		</div>
