@@ -458,6 +458,26 @@ curl -XGET http://localhost:9200/subscriptions/msg/1?pretty&_source_transform
 						</code>
 					</pre>
 				</section>
+				<section>
+					<h2>Query & Filter</h2>
+					<pre>
+						<code>curl -XGET http://localhost:9200/_search?q=user:kimchy</code>
+						<code>
+curl -XGET http://localhost:9200/_search -d '{
+  "query": {
+    "filtered": { 
+      "query": {
+        "match": { "_all": "to be or not to be" }
+      },
+      "filter": {
+        "term": { "status": "created"}
+      }
+    }
+  }
+}'
+						</code>
+					</pre>
+				</section>
 			</div>
 
 		</div>
