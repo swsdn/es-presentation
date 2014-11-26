@@ -418,6 +418,46 @@ curl -XGET http://localhost:9200/subscriptions/msg/1?pretty&_source_transform
 						</li>
 					</ul>
 				</section>
+				
+				<section>
+					<pre>
+						<code>
+{
+  "analysis": {
+    "char_filter": {
+      "polish_mapping": {
+        "type": "mapping",
+        "mappings": [
+          "ą=>a", "Ą=>a",
+          "ć=>c", "Ć=>c",
+          "ę=>e", "Ę=>e",
+          "ł=>l", "Ł=>l",
+          "ń=>n", "Ń=>n",
+          "ó=>o", "Ó=>o",
+          "ś=>s", "Ś=>s",
+          "ź=>z", "Ź=>z",
+          "ż=>z", "Ż=>z"
+        ]
+      }
+    },
+    "analyzer": {
+      "standard_with_polish_signs": {
+        "alias": [ "default" ],
+        "tokenizer": "standard",
+        "filter": [ "standard", "lowercase" ],
+        "char_filter": [ "polish_mapping" ]
+      },
+      "lowercase": {
+        "type": "pattern",
+        "pattern": "$^",
+        "filter": [ "lowercase" ]
+      }
+    }
+  }
+}
+						</code>
+					</pre>
+				</section>
 			</div>
 
 		</div>
